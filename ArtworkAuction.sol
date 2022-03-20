@@ -52,13 +52,13 @@ contract ArtworkAuction{
     }
 
     function newBid(uint nbTickets) external {
-        require(auctionIsOpen);
         require(ticketRegistry[msg.sender] >= nbTickets);
         auctionRegistry[msg.sender] += nbTickets;
         ticketRegistry[msg.sender] -= nbTickets;
 
         if (!is_bidder(msg.sender))
             bidders[n_bidders++] = msg.sender;
+        auctionIsOpen = true;
     }
 
     function is_bidder(address ad) private view returns(bool){
